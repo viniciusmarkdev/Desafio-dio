@@ -1,5 +1,6 @@
 package me.forest.serviceImpl;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
@@ -36,18 +37,22 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User create(User userToCreated) {
 	
-		if(userRepository.findById(userToCreated.getId()) != null) {
-			
-			throw new IllegalArgumentException("This User with ID already exists.");
-		}
+		
 		
 		return userRepository.save(userToCreated);
 	}
+    
+
+	@Override
+	public List<User> findAll() {
+		
+	      return userRepository.findAll();
+	}
 
 
+	
 
 	
 	
 	
-
 }

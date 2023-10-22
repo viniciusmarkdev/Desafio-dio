@@ -11,6 +11,7 @@ import me.forest.model.User;
 import me.forest.service.UserService;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -21,6 +22,13 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+    
+    @GetMapping("/all")
+    public ResponseEntity<List<User>> findAll(){
+    	
+    	return ResponseEntity.ok(userService.findAll());
+	
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id) {
@@ -28,7 +36,7 @@ public class UserController {
        return ResponseEntity.ok(user);
     }
 
-    @PostMapping
+    @PostMapping("/criarUsuario")
     public ResponseEntity<User> create(@RequestBody User userToCreate) {
         var userCreated = userService.create(userToCreate);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()

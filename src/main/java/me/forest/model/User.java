@@ -2,7 +2,11 @@ package me.forest.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,7 +25,8 @@ public class User {
        
        private  int coins;
        
-       @OneToMany
+       @OneToMany(cascade = CascadeType.ALL  , fetch = FetchType.EAGER)
+       @JsonIgnoreProperties
        private List<Tree> trees;
 
 	public Long getId() {
